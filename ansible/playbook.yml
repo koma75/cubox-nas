@@ -2,7 +2,7 @@
 - hosts: 127.0.0.1
   vars:
   vars_files:
-    - /vars/proxy_env.yml
+    - ./vars/proxy_env.yml
   connection: local
   sudo: yes
   roles:
