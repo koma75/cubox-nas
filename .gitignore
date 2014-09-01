@@ -9,6 +9,13 @@
 /test/version_tmp/
 /tmp/
 
+## Vagrant specific
+.env
+/.vagrant/
+
+## Ansible specific
+/ansible/*/proxy_env.yml
+
 ## Specific to RubyMotion:
 .dat*
 .repl_history

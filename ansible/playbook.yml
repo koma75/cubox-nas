@@ -1,12 +1,10 @@
 ---
 - hosts: 127.0.0.1
-#  vars:
-#    proxy_env:
-#      http_proxy: http://172.19.24.186:8081/
-#      https_proxy: http://172.19.24.186:8081/
+  vars:
+  vars_files:
+    - /vars/proxy_env.yml
   connection: local
   sudo: yes
-  tasks:
-    - name: install ruby
-      apt: pkg=ruby update_cache=yes
-      environment: proxy_env
+  roles:
+    - common
+#    - jekyll

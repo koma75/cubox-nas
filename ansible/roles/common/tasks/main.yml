@@ -1,0 +1,4 @@
+---
+
+- name: make sure curl is at the latest version
+  apt: pkg=curl state=latest

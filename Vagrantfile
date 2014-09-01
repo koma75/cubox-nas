@@ -4,6 +4,8 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
+Dotenv.load
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
@@ -15,9 +17,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "shell", :path => "provision.sh"
   config.vm.network "private_network", ip: "192.168.33.10"
   if Vagrant.has_plugin?("vagrant-proxyconf")
-    config.proxy.http = "http://192.168.33.1:8080"
-    config.proxy.https = "http://192.168.33.1:8080"
-    config.proxy.no_proxy = "localhost,127.0.0.1,192.168.*.*"
+    config.proxy.http = "#{ENV['PROXY_HTTP']}"
+    config.proxy.https = "#{ENV['PROXY_HTTPS']}"
+    config.proxy.no_proxy = "#{['PROXY_NO_PROXY']}"
   end
 
   # Disable automatic box update checking. If you disable this, then
