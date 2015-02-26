@@ -1,4 +1,0 @@
----
-
-- name: make sure jekyll 2.3.0 is installed
-  gem: name=jekyll version=2.3.0 state=present user_install=no

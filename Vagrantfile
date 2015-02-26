@@ -4,16 +4,15 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
-Dotenv.load
-
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "hashicorp/precise32"
+  config.vm.box = "arch"
   config.vm.synced_folder ".", "/vagrant", :mount_options => ['dmode=755', 'fmode=664']
+  config.vm.synced_folder "ansible/", "/srv/ansible/", :mount_options => ['dmode=755', 'fmode=664']
   config.vm.provision "shell", :path => "provision.sh"
   config.vm.network "private_network", ip: "192.168.33.10"
   if Vagrant.has_plugin?("vagrant-proxyconf")

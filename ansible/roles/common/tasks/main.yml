@@ -1,4 +1,7 @@
 ---
 
 - name: make sure curl is at the latest version
-  apt: pkg=curl state=latest
+  pacman: name=curl state=present
+
+- name: make sure wget is at the latest version
+  pacman: name=wget state=present
