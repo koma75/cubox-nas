@@ -1,8 +1,14 @@
 ---
 
-- name: make sure smb is installed
-  pacman: name=smb state=present
+- name: make sure samba is installed
+  pacman: name=samba state=present
 
 # Copy setting files
+# name: make sure samba is configured
+# template: src=samba.conf.j2 dest=/etc/samba.conf
+# notify:
+#   - restart samba
 
 # Start the service when things change
+- name: start samba service
+  service: name=samba state=running enabled=yes
