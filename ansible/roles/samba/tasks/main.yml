@@ -1,0 +1,8 @@
+---
+
+- name: make sure smb is installed
+  pacman: name=smb state=present
+
+# Copy setting files
+
+# Start the service when things change
