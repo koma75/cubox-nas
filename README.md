@@ -1,11 +1,9 @@
 vagrant-work
 ============
 
-Ansible playground.
+Cubox-i NAS setup scripts.
 
-Currently making a vagrant based test bed for Arch Linux file server setup.
-
-## Initial setups
+## Initial setups for cubox
 
 ### Install
 
@@ -44,7 +42,7 @@ follow the instructions at ArchLinux ARM http://archlinuxarm.org/platforms/armv7
 6. `umount /mnt`
 7. edit /etc/fstab
   * `UUID=XXXXXXXX  /mnt/MOUNTDIR   btrfs   noatime,autodefrag,compress-force=lzo,space_cache       0 0`
-8. `shutdown -r now` to make sure it mounts automatially
+8. `shutdown -r now` to make sure it mounts automatially at boot
 
 ### Prep for Ansible
 
@@ -61,7 +59,41 @@ follow the instructions at ArchLinux ARM http://archlinuxarm.org/platforms/armv7
 
 ## Application setup
 
-run the ansible at https://github.com/koma75/vagrant-work
+### preps
+
+To use the folder settings in ansible/group_vars/all/secret.yml, add the file
+`ansible/.vault_pass.txt` and enter the password.
+Otherwise replace secret.yml with shared folder settings.
+
+~~~yaml
+shared_folders:
+- path: /path/to/original/mountpoint1
+  nfs_path: /path/to/nfs4/mountpoint1
+  nfs_opts: 192.168.1.0/24(rw,no_subtree_check,nohide)
+- path: /path/to/original/mountpoint2
+  nfs_path: /path/to/nfs4/mountpoint2
+  nfs_opts: 192.168.1.0/24(rw,no_subtree_check,nohide)
+~~~
+
+in the future, I will be adding user creation in this file
+
+### test using Vagrant
+
+1. make sure arch linux base box is available as "arch"
+  * tested using [this packer template](https://github.com/koma75/packer-arch.git)
+2. `git clone https://github.com/koma75/vagrant-work.git vagrant-work`
+3. `cd vagrant-work`
+4. `vagrant up`
+
+### Deploy to cubox
+
+1. make sure target is accessible as cubox
+  * or change the hosts file appropriately
+2. make sure ssh to cubox using ansible user is set up
+  * make sure ansible is added as nopassword sudoer
+3. `git clone https://github.com/koma75/vagrant-work.git vagrant-work`
+4. `cd vagrant-work/ansible`
+5. `ansible-playbook -i hosts deploy.yml --vault-password-file ./.vault_pass.txt`
 
 ## Client side
 
