@@ -1,0 +1,19 @@
+---
+
+- name: make sure nfs-utils is installed
+  pacman: name=nfs-utils state=present
+
+# Copy setting files
+# name: make sure nfs-utils is configured
+# template: src=vsftpd.conf.j2 dest=/etc/vsftpd.conf
+# notify:
+#   - restart rpcbind
+#   - restart nfs-server
+
+# Start the service when things change
+- name: start rpcbind service
+  service: name=rpcbind state=running enabled=yes
+
+# Start the service when things change
+- name: start nfs-server service
+  service: name=nfs-server state=running enabled=yes

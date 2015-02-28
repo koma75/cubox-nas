@@ -1,0 +1,14 @@
+---
+
+- name: make sure vsftpd is installed
+  pacman: name=vsftpd state=present
+
+# Copy setting files
+# name: make sure vsftpd is configured
+# template: src=vsftpd.conf.j2 dest=/etc/vsftpd.conf
+# notify:
+#   - restart vsftpd
+
+# Start the service when things change
+- name: start vsftpd service
+  service: name=vsftpd state=running enabled=yes

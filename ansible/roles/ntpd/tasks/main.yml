@@ -1,0 +1,14 @@
+---
+
+- name: make sure ntp is installed
+  pacman: name=ntp state=present
+
+# Copy setting files
+# name: make sure ntp is configured
+# template: src=ntp.conf.j2 dest=/etc/ntp.conf
+# notify:
+#   - restart ntpd
+
+# Start the service when things change
+- name: start ntpd service
+  service: name=ntpd state=running enabled=yes

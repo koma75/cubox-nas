@@ -1,0 +1,14 @@
+---
+
+- name: make sure apache is installed
+  pacman: name=apache state=present
+
+# Copy setting files
+# name: make sure httpd is configured
+# template: src=httpd.conf.j2 dest=/etc/httpd.conf
+# notify:
+#   - restart httpd
+
+# Start the service when things change
+- name: start httpd service
+  service: name=httpd state=running enabled=yes

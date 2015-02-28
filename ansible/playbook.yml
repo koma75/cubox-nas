@@ -5,3 +5,7 @@
   sudo: yes
   roles:
     - common
+    - webserver
+    - samba
+    - ftpd
+    - nfs
