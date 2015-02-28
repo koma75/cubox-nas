@@ -1,0 +1,5 @@
+---
+
+- name: setup fake mnt points
+  file: path={{ item.path }} state=directory
+  with_items: shared_folders

@@ -3,17 +3,22 @@
 - name: make sure nfs-utils is installed
   pacman: name=nfs-utils state=present
 
-# Copy setting files
-# name: make sure nfs-utils is configured
-# template: src=vsftpd.conf.j2 dest=/etc/vsftpd.conf
-# notify:
-#   - restart rpcbind
-#   - restart nfs-server
-
-# Start the service when things change
 - name: start rpcbind service
   service: name=rpcbind state=running enabled=yes
 
-# Start the service when things change
+- name: make sure all nfs mount points exist
+  file: path={{ item.nfs_path }} state=directory
+  with_items: shared_folders
+
+- name: mount all nfs exports
+  mount: name={{ item.nfs_path }} src={{ item.path }} fstype=none opts=bind state=present
+  with_items: shared_folders
+
+- name: setup exports
+  template: src=exports.j2 dest=/etc/exports backup=yes owner=root group=root mode=0644
+  notify:
+    - reload exports
+    - restart nfs-server
+
 - name: start nfs-server service
   service: name=nfs-server state=running enabled=yes
