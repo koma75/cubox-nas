@@ -4,9 +4,9 @@
   connection: local
   sudo: yes
   roles:
-    - common
-    - testbed
-    - webserver
-    - samba
-    - ftpd
-    - nfs
+    - { role: common, tags: "common" }
+    - { role: testbed, tags: "testbed" }
+    - { role: webserver, tags: "webserver" }
+    - { role: samba, tags: "samba" }
+    - { role: ftpd, tags: "ftpd" }
+    - { role: nfs, tags: "nfs" }

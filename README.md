@@ -94,6 +94,7 @@ in the future, I will be adding user creation in this file
 3. `git clone https://github.com/koma75/vagrant-work.git vagrant-work`
 4. `cd vagrant-work/ansible`
 5. `ansible-playbook -i hosts deploy.yml --vault-password-file ./.vault_pass.txt`
+  * use the `--tags "tag1,tag2"` to only run specific tags
 
 ## Client side
 

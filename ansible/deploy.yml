@@ -3,7 +3,7 @@
   vars:
   sudo: yes
   roles:
-    - common
-    - ftpd
-    - nfs
-    - webserver
+    - { role: common, tags: "common" }
+    - { role: ftpd, tags: "ftpd" }
+    - { role: nfs, tags: "nfs" }
+    - { role: webserver, tags: "webserver" }
