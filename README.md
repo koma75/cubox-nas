@@ -1,4 +1,4 @@
-vagrant-work
+cubox-nas
 ============
 
 Cubox-i NAS setup scripts.
